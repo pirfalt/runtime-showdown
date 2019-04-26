@@ -4,7 +4,7 @@ services:
   availability:
     image: nginx:1.15-alpine
     volumes:
-      - ./example/api/availability:/usr/share/nginx/html/api/availability:ro
+      - ./datasources/availability:/usr/share/nginx/html/api/availability:ro
     ports:
       - "8081:80"
 
