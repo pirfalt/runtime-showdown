@@ -1,0 +1,38 @@
+version: "3"
+services:
+  # The availability dependency
+  availability:
+    image: nginx:1.15-alpine
+    volumes:
+      - ./example/api/availability:/usr/share/nginx/html/api/availability:ro
+    ports:
+      - "8081:80"
+
+  # The price dependency
+  #
+  # connect
+  # docker run --rm -it postgres:11-alpine psql --host $(myip) --port 5432 --username test --dbname price
+  price:
+    image: postgres:11-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=price
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+    volumes:
+      - ./datasources/price:/docker-entrypoint-initdb.d
+      - pgdata:/var/lib/postgresql/data
+
+  # Perf testing, dont forget to change the ip address
+  gatling:
+    image: denvazh/gatling:3.0.3
+    volumes:
+      - ./perf-test/gatling/user-files:/opt/gatling/user-files
+      - ./perf-test/gatling/results:/opt/gatling/results
+    environment:
+      - "JAVA_OPTS=-Dhost=http://172.20.10.3:8080"
+    command: ["--run-description", "descr"]
+
+volumes:
+  pgdata:

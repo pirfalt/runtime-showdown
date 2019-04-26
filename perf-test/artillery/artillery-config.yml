@@ -1,0 +1,40 @@
+config:
+  target: https://artillery.io
+  http:
+    pool: 10
+  phases:
+    - duration: 180
+      arrivalRate: 0
+      rampTo: 100
+    # - duration: 20
+    #   arrivalRate: 10
+    # - duration: 240
+    #   arrivalRate: 10
+    #   rampTo: 1000
+  defaults:
+    headers:
+scenarios:
+  - name: "/api/hello/"
+    flow:
+      - count: 100
+        loop:
+          - get:
+              url: "/api/hello/"
+  - name: "/api/availability/1.json"
+    flow:
+      - count: 100
+        loop:
+          - get:
+              url: "/api/availability/1.json"
+  - name: "/api/item/1.json"
+    flow:
+      - count: 100
+        loop:
+          - get:
+              url: "/api/item/1.json"
+  - name: "/api/itemset/1.json"
+    flow:
+      - count: 100
+        loop:
+          - get:
+              url: "/api/itemset/1.json"

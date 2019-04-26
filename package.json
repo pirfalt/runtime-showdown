@@ -1,0 +1,19 @@
+{
+  "name": "runtime-showdown",
+  "version": "1.0.0",
+  "description": "## Overview",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "faker": "^4.1.0",
+    "koa": "^2.7.0",
+    "pg": "^7.10.0"
+  }
+}

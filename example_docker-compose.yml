@@ -1,0 +1,9 @@
+version: "3"
+services:
+  # An example "implemenation"
+  example:
+    image: nginx:1.15-alpine
+    volumes:
+      - ./example/api:/usr/share/nginx/html/api:ro
+    ports:
+      - "8080:80"
